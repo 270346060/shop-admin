@@ -28,3 +28,12 @@ create table SHOPPING_CART_ITEM(
   constraint SHOPPING_CART_ITEM_FK_CELLPHONE_ID_CELLPHONE foreign key (CELLPHONE_ID) references CELLPHONE (ID),
   constraint SHOPPING_CART_ITEM_PK primary key (USER_ID, CELLPHONE_ID)
 );
+
+create table SHIPPING_ADDRESS(
+  ID identity,
+  USER_ID bigint not null,
+  NAME varchar(64) not null,
+  PHONE_NUMBER varchar(16) not null,
+  ADDRESS varchar(128) not null,
+  constraint SHIPPING_ADDRESS_FK_USER_ID_USER foreign key (USER_ID) references USER (ID)
+);
