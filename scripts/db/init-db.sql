@@ -37,3 +37,20 @@ create table SHIPPING_ADDRESS(
   ADDRESS varchar(128) not null,
   constraint SHIPPING_ADDRESS_FK_USER_ID_USER foreign key (USER_ID) references USER (ID)
 );
+
+create table "ORDER"(
+  id identity,
+  USER_ID bigint not null,
+  SHIPPING_ADDRESS_ID bigint not null,
+  CREATED_TIME timestamp not null,
+  constraint ORDER_FK_USER_ID_USER foreign key (USER_ID) references USER (ID),
+  constraint ORDER_FK_SHIPPING_ADDRESS_ID_SHIPPING_ADDRESS foreign key (SHIPPING_ADDRESS_ID) references SHIPPING_ADDRESS (ID)
+);
+
+create table ORDER_ITEM(
+  ORDER_ID bigint not null,
+  CELLPHONE_ID bigint not null,
+  AMOUNT integer not null,
+  constraint ORDER_ITEM_FK_ORDER_ID_ORDER foreign key (ORDER_ID) references "ORDER" (ID),
+  constraint ORDER_ITEM_FK_CELLPHONE_ID_CELLPHONE foreign key (CELLPHONE_ID) references CELLPHONE (ID)
+);
