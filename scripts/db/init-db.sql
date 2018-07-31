@@ -23,7 +23,7 @@ create table USER(
 create table SHOPPING_CART_ITEM(
   USER_ID bigint not null,
   CELLPHONE_ID bigint not null,
-  AMOUNT integer, 
+  QUANTITY integer, 
   constraint SHOPPING_CART_ITEM_FK_USER_ID_USER foreign key (USER_ID) references USER (ID),
   constraint SHOPPING_CART_ITEM_FK_CELLPHONE_ID_CELLPHONE foreign key (CELLPHONE_ID) references CELLPHONE (ID),
   constraint SHOPPING_CART_ITEM_PK primary key (USER_ID, CELLPHONE_ID)
@@ -50,7 +50,7 @@ create table "ORDER"(
 create table ORDER_ITEM(
   ORDER_ID bigint not null,
   CELLPHONE_ID bigint not null,
-  AMOUNT integer not null,
+  QUANTITY integer not null,
   constraint ORDER_ITEM_FK_ORDER_ID_ORDER foreign key (ORDER_ID) references "ORDER" (ID),
   constraint ORDER_ITEM_FK_CELLPHONE_ID_CELLPHONE foreign key (CELLPHONE_ID) references CELLPHONE (ID)
 );
