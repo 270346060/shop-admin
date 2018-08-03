@@ -44,6 +44,7 @@ create table "ORDER"(
   SHIPPING_ADDRESS_ID bigint not null,
   CREATED_TIME timestamp not null,
   "STATE" varchar(64) not null,
+  TOTAL_AMOUNT integer,
   constraint ORDER_FK_USER_ID_USER foreign key (USER_ID) references USER (ID),
   constraint ORDER_FK_SHIPPING_ADDRESS_ID_SHIPPING_ADDRESS foreign key (SHIPPING_ADDRESS_ID) references SHIPPING_ADDRESS (ID)
 );
