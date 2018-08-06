@@ -53,6 +53,6 @@ create table ORDER_ITEM(
   ORDER_ID bigint not null,
   CELLPHONE_ID bigint not null,
   QUANTITY integer not null,
-  constraint ORDER_ITEM_FK_ORDER_ID_ORDER foreign key (ORDER_ID) references "ORDER" (ID),
+  constraint ORDER_ITEM_FK_ORDER_ID_ORDER foreign key (ORDER_ID) references "ORDER" (ID) on delete cascade,
   constraint ORDER_ITEM_FK_CELLPHONE_ID_CELLPHONE foreign key (CELLPHONE_ID) references CELLPHONE (ID)
 );
