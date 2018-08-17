@@ -13,10 +13,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 
 @Configuration
@@ -25,9 +27,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @PropertySource("classpath:jdbc.properties")
 @MapperScan("shopadmin.mapper")
 public class AppConfig extends WebMvcConfigurerAdapter {
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.jsp("/WEB-INF/jsp/", ".jsp");
+
+    @Bean
+    public ViewResolver freeMarkerViewResolver() {
+        FreeMarkerViewResolver vr = new FreeMarkerViewResolver("", ".ftl");
+        vr.setCache(false);
+        vr.setContentType("text/html;charset=utf-8");
+        return vr;
+    }
+    
+    @Bean
+    public FreeMarkerConfigurer freeMarkerConfigurer() {
+        FreeMarkerConfigurer config = new FreeMarkerConfigurer();
+        config.setTemplateLoaderPath("/WEB-INF/freemarker/");
+        return config;
     }
     
     @Bean
