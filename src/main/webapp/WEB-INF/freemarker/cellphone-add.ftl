@@ -1,5 +1,14 @@
 <#include 'layout.ftl'>
 
+<#-- 
+css的默认值是从include layout来的：
+<#macro css>
+</#macro>
+
+其实macro是一种变量（css=''）
+
+下面的<#macro css>会替换掉同名变量的值（css='<link href...'）
+ -->
   <#macro css>
     <link href="<@spring.url '/assets/css/form.css' />" rel="stylesheet">
   </#macro>
@@ -74,9 +83,17 @@
         <@spring.showErrors "<br>" "field-error" />
       </div>
       
+<#-- 
+调用指令传参：
+1. 根据参数位置传，不需要参数名=，但是必须要指令定义时参数顺序传
+2. 根据参数名字传，不需要按顺序传，但是要参数名=
+建议：一到两个参数按位置传，更多的话按名字传
+注意：参数值是字符串常量时，要引起来（可单可双），但是要从model取值时，写名字就可以
+ -->
+ 
       <div>
         <label for=storage>机身存储</label>
-        <@spring.formInput path="cellphone.storage" 
+        <@spring.formInput path="cellphone.storage"
                            fieldType="number" 
                            attributes='min="16" max="256" placeholder="GB"' />
         <@spring.showErrors "<br>" "field-error" />

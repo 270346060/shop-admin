@@ -12,6 +12,7 @@
   </properties>
 
   <dependencies>
+    <!-- 包含了spring对freemarker的支持 -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>

@@ -27,19 +27,21 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 @PropertySource("classpath:jdbc.properties")
 @MapperScan("shopadmin.mapper")
 public class AppConfig extends WebMvcConfigurerAdapter {
-
+    
+//    视图解析器的职责是：将控制器方法返回的字符串映射到某个模板文件（如.jsp、.ftl）
+//    视图的职责是：将model结合模板通过模板引擎（如jsp、freemarker）生成HTML
     @Bean
     public ViewResolver freeMarkerViewResolver() {
         FreeMarkerViewResolver vr = new FreeMarkerViewResolver("", ".ftl");
-        vr.setCache(false);
-        vr.setContentType("text/html;charset=utf-8");
+        vr.setCache(false); // 禁用模板缓存，方便开发时刷新浏览器就可以看到修改
+        vr.setContentType("text/html;charset=utf-8"); // 避免乱码
         return vr;
     }
     
     @Bean
     public FreeMarkerConfigurer freeMarkerConfigurer() {
         FreeMarkerConfigurer config = new FreeMarkerConfigurer();
-        config.setTemplateLoaderPath("/WEB-INF/freemarker/");
+        config.setTemplateLoaderPath("/WEB-INF/freemarker/"); // 配置模板加载路径
         return config;
     }
     
