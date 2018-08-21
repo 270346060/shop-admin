@@ -1,10 +1,10 @@
 package shopadmin.model;
 
-import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 public class Cellphone {
     private Long id;
-    @NotEmpty(message = "必填")
+    @Length(min = 1, max = 128, message = "必填")
     private String brand;
     private String model;
     private String os;
