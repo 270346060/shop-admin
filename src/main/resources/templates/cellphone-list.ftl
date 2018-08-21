@@ -1,11 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<#include 'layout.ftl'>
 
-<t:layout title="手机列表">
+<@layout title="手机列表">
   <table>
     <tr>
       <th>品牌</th>
@@ -17,7 +12,7 @@
       <th>颜色</th>
       <th>价格</th>
     </tr>
-    <c:forEach items="${cellphones}" var="cellphone">
+    <#list cellphones as cellphone>
       <tr>
         <td>${cellphone.brand}</td>
         <td>${cellphone.model}</td>
@@ -28,6 +23,6 @@
         <td>${cellphone.color}</td>
         <td>${cellphone.price}</td>
       </tr>
-    </c:forEach>
+    </#list>
   </table>
-</t:layout>
+</@layout>
