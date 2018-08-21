@@ -2,4 +2,6 @@ spring.mvc.static-path-pattern: /assets/**
 
 mybatis.config-location: classpath:mybatis-config.xml
 
-security.user.password: 123456
+security:
+  user.password: 123456
+  enableCsrf: true
