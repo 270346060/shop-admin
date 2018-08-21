@@ -21,8 +21,7 @@ css的默认值是从include layout来的：
   
 <@layout title="添加手机">
     <form action="" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
+      <#--  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> -->
       <div>
         <label for="brand">品牌</label>
         <@spring.formSingleSelect "cellphone.brand" 

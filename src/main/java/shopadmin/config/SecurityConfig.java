@@ -1,23 +1,14 @@
 package shopadmin.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@EnableWebSecurity 
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager um = new InMemoryUserDetailsManager();
-        um.createUser(User
-                .withUsername("admin")
-                .password("$2a$10$pyhoz7k3QLux1jrJmuE.ZOenAbfrGpa8cSMYa4xs9reYaDsUyXsfG")
-                .authorities("ADMIN").build());
-        return um;
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
     }
 }
