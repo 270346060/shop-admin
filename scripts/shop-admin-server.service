@@ -1,0 +1,11 @@
+[Unit]
+Description=shop-admin-server
+After=syslog.target
+
+[Service]
+User=shopadmin
+ExecStart=/home/shopadmin/app.jar
+SuccessExitStatus=143
+PIDFile=/home/shopadmin/RUNNING_PID
+Restart=always
+RestartSec=3

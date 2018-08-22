@@ -1,0 +1,36 @@
+部署步骤说明：
+a. 配置springboot的maven插件
+          <plugin>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-maven-plugin</artifactId>
+              <configuration>
+                <executable>true</executable>
+              </configuration>
+          </plugin>
+
+b. 写Linux的systemd配置文件shop-admin-server.service，注意：用户名shopadmin要改成自己的
+[Unit]
+Description=shop-admin-server
+After=syslog.target
+
+[Service]
+User=shopadmin
+ExecStart=/home/shopadmin/app.jar
+SuccessExitStatus=143
+PIDFile=/home/shopadmin/RUNNING_PID
+Restart=always
+RestartSec=3
+
+c. 写App的配置文件app.conf，注意：必须跟jar包同名
+JAVA_HOME=/opt/java/current
+JAVA_OPTS=-Djdbc.url=jdbc:h2:tcp://localhost/~/shop -Dsome.conf=someValue
+
+d. 把shop-admin-server.service scp到root用户的/etc/systemd/system/目录下，
+   把mvn package之后得到的target目录下的jar包 scp到shopadmin用户的home目录下，以app.jar为文件名，
+   把app.conf scp到shopadmin用户的home目录下 
+
+安装服务，注意：some-server改成shop-admin-server
+以root身份运行：
+  systemctl enable some-server
+  systemctl start  some-server
+  systemctl status some-server
